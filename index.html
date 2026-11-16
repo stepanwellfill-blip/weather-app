@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Погода — прогноз на 5 дней</title>
+  <meta name="description" content="Современное погодное приложение: текущая погода и прогноз на 5 дней для любого города. Геолокация, сохранение города, понятные ошибки." />
+  <meta property="og:title" content="Погода — прогноз на 5 дней" />
+  <meta property="og:description" content="Узнайте погоду сейчас и на 5 дней вперёд. Просто, быстро, красиво." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://openweathermap.org/img/wn/01d@2x.png" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body data-state="empty">
+  <div class="app-wrapper">
+    <header class="app-header">
+      <div class="logo">
+        <svg class="logo-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2"/>
+        </svg>
+        <span class="logo-text">Погода</span>
+      </div>
+      <button type="button" id="geo-btn" class="btn btn-secondary" aria-label="Определить моё местоположение">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+          <circle cx="12" cy="9" r="2.5" stroke="currentColor" stroke-width="2"/>
+        </svg>
+        <span>Моё местоположение</span>
+      </button>
+    </header>
+
+    <main>
+      <!-- Поиск -->
+      <section class="search-section" aria-label="Поиск города">
+        <form id="search-form" class="search-form" role="search">
+          <label for="city-input" class="visually-hidden">Название города</label>
+          <input
+            type="text"
+            id="city-input"
+            class="search-input"
+            placeholder="Введите город, например, Москва"
+            autocomplete="off"
+            aria-describedby="search-hint"
+          />
+          <button type="submit" class="btn btn-primary" aria-label="Найти погоду">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/>
+              <path d="m20 20-3.5-3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <span>Найти</span>
+          </button>
+        </form>
+        <p id="search-hint" class="search-hint">Или разрешите геолокацию — определим город автоматически</p>
+      </section>
+
+      <!-- Приветственный экран (empty state) -->
+      <section class="state-empty" aria-label="Приветствие">
+        <div class="welcome-card glass">
+          <svg class="welcome-icon" width="64" height="64" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a4 4 0 0 0 0-8Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+          </svg>
+          <h1 class="welcome-title">Узнайте погоду</h1>
+          <p class="welcome-text">Введите город или разрешите геолокацию, чтобы увидеть текущую погоду и прогноз на 5 дней.</p>
+        </div>
+      </section>
+
+      <!-- Лоадер (skeleton) -->
+      <section class="state-loading" aria-label="Загрузка данных" aria-busy="true">
+        <div class="skeleton-current glass">
+          <div class="skeleton skeleton-circle"></div>
+          <div class="skeleton skeleton-line w-40"></div>
+          <div class="skeleton skeleton-line w-60"></div>
+          <div class="skeleton-grid">
+            <div class="skeleton skeleton-block"></div>
+            <div class="skeleton skeleton-block"></div>
+            <div class="skeleton skeleton-block"></div>
+            <div class="skeleton skeleton-block"></div>
+          </div>
+        </div>
+        <div class="skeleton-forecast">
+          <div class="skeleton skeleton-card" style="animation-delay: 0.1s"></div>
+          <div class="skeleton skeleton-card" style="animation-delay: 0.2s"></div>
+          <div class="skeleton skeleton-card" style="animation-delay: 0.3s"></div>
+          <div class="skeleton skeleton-card" style="animation-delay: 0.4s"></div>
+          <div class="skeleton skeleton-card" style="animation-delay: 0.5s"></div>
+        </div>
+      </section>
+
+      <!-- Ошибка -->
+      <section class="state-error" aria-label="Ошибка">
+        <div class="error-card glass" role="alert">
+          <svg class="error-icon" width="40" height="40" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/>
+            <path d="M12 8v5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="12" cy="16" r="1" fill="currentColor"/>
+          </svg>
+          <p id="error-message" class="error-text"></p>
+          <button type="button" id="retry-btn" class="btn btn-secondary">Попробовать снова</button>
+        </div>
+      </section>
+
+      <!-- Успешная погода -->
+      <section class="state-ready" aria-label="Текущая погода и прогноз">
+        <article class="current-weather glass" id="current-weather">
+          <!-- Заполняется в JS -->
+        </article>
+        <section class="forecast-section" aria-label="Прогноз на 5 дней">
+          <h2 class="forecast-title">Прогноз на 5 дней</h2>
+          <div class="forecast-grid" id="forecast-grid">
+            <!-- Заполняется в JS -->
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <p>Данные: <a href="https://openweathermap.org/" target="_blank" rel="noopener noreferrer">OpenWeatherMap</a>. Сделано для портфолио.</p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
