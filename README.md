@@ -15,7 +15,7 @@
 <p>
   <a href="https://stepanwillfil-blip.github.io/weather-app/">🚀 Открыть приложение</a>
   ·
-  <a href="https://github.com/stepanwillfil-blip/weather-app">Исходный код</a>
+  <a href="https://github.com/stepanwellfil-blip/weather-app">Исходный код</a>
 </p>
 
 <img src="./screenshot.png" alt="Скриншот погодного приложения" width="900">
