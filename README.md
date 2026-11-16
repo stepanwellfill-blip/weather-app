@@ -13,7 +13,7 @@
   <img src="https://img.shields.io/badge/OpenWeatherMap-API-orange?style=for-the-badge" alt="OpenWeatherMap API">
 </p>
 <p>
-  <a href="https://stepanwillfil-blip.github.io/weather-app/">🚀 Открыть приложение</a>
+  <a href="https://stepanwellfill-blip.github.io/weather-app/">🚀 Открыть приложение</a>
   ·
   <a href="https://github.com/stepanwellfill-blip/weather-app">Исходный код</a>
 </p>
