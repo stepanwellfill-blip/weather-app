@@ -233,8 +233,8 @@ GitHub Pages публикует JavaScript-код для браузера. По�
 ## 📬 Контакты
 
 - **GitHub:** [@stepanwillfil-blip](https://github.com/stepanwillfil-blip)
-- **Telegram:** `@SanechkaPozitiv` — замени на свой ник.
-- **Email:** `stepanwellfill@gmail.com` — добавь актуальный адрес, если хочешь его указать.
+- **Telegram:** `@SanechkaPozitiv`
+- **Email:** `stepanwellfill@gmail.com`
 
 ## 📄 Лицензия
 
